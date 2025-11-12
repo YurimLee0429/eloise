@@ -1,4 +1,4 @@
-// --- [1. 게임 데이터 (V27 - 힌트 추가)] ---
+// --- [1. 게임 데이터 (V28 - 기획자님 수정사항 반영)] ---
 const gameData = {
     introText: "25세 연구원 'Eloise'가 실종되었다.\n경찰은 단순 가출로 보지만, 당신은 직감한다.\n이것은 과학적 트릭으로 감춰진... 완벽한 납치극이다.\n\n단서는 6곳. 기회는 3번.",
     debriefText: "...모든 탐색이 끝났다.\n\n당신은 3번의 방문 기회를 모두 사용했다.\n이제 되돌릴 수 없다.\n\n인벤토리의 단서들을 조합하여\n그녀를 구할 단 하나의 진실을 꿰뚫어라.", 
@@ -44,7 +44,7 @@ const gameData = {
             intro: "마을 도서관은 언제나처럼 고요하지만, 공기는 무겁게 가라앉아 있다.\nEloise가 마지막으로 목격된 15일, 그녀는 이곳에 들렀다.\n\n당신은 그녀의 흔적을 찾기 시작했다.",
             actions: {
                 "1": { name: "[과학/논문 섹션]을 조사한다.", is_true: true, hint_ids: ["G_Num", "G_Map", "C2"] },
-                "2": { name: "[신문 자료실]을 조사한다.", is_true: false, hint_ids: ["F_Prof_Scandal", "F_David_Library"] }, // [V27 수정]
+                "2": { name: "[신문 자료실]을 조사한다.", is_true: false, hint_ids: ["F_Prof_Scandal", "F_David_Library"] },
                 "3": { name: "[사기/구직 섹션]을 조사한다.", is_true: false, hint_ids: ["F_Job_Listing"] }
             }
         },
@@ -82,7 +82,7 @@ const gameData = {
             }
         }
     },
-    // [V27 수정] 힌트 텍스트
+    // [V28 수정] 기획자님 힌트 수정사항 반영
     hints: {
         "A": { name: "Eloise의 의료 기록 카드", text: "<span class='hint-title'>[의료 기록 카드]</span>\n> 이름: Eloise (25세)\n> 혈액형: O형 (Rh+)\n> 특이사항: \"타인에게 절대 수혈 불가. 지정 헌혈 필수.\"" },
         "D": { name: "Eloise의 수학 노트", text: "<span class='hint-title'>[수학 노트]</span>\n> \"질문: (x-1)(y-2)(z-3) = 1\"\n> ... (아래에 붉은 펜으로 엑스 표시가 되어있고, 글씨가 수정되어 있다.)\n> \"아니, (x-1)(y-2)(z-3) = **0**\"\n> \"방정식은 '0'이어야만 한다. **'1'**은 그가 모든 것을 망치는 **실수**다.\"" },
@@ -103,7 +103,7 @@ const gameData = {
         "F_David_Library": { name: "도서관 대출 기록", text: "<span class='hint-title'>[도서관 대출 기록]</span>\n> \"15일 14:30, 'David (조교)'가 [월간 과학] 최신호와 [대학 편람]을 대출하려 했으나, '대출 불가' 도서라 열람만 하고 감.\""},
         "F_Job_Listing": { name: "고수익 의료 알바", text: "<span class='hint-title'>[구인/구직 섹션의 포스트잇]</span>\n> \"급구: '대학 병원 (신관)' 임상시험 참가자.\n> 15일 마감. 고액 지급 보장.\"" },
         "F_Police": { name: "김 형사의 브리핑", text: "<span class='hint-title'>[김 형사의 브리핑]</span>\n> \"우리는 단순 가출이나, 최근 유행하는 고수익 알바 사기에 연루된 걸로 보고 있어.\"" },
-        "F_Police_Alibi": { name: "김 형사의 용의자 정보", text: "<span class'hint-title'>[김 형사의 대답]</span>\n> \"아, 다른 용의자들은 알리바이가 다 있더라고.\"\n> \"우린 그 'Andrew'를 쫓고 있지. 알고 보니 그놈, 예전에 불법 밀매를 한 적이 있더군.\"" },
+        "F_Police_Alibi": { name: "김 형사의 용의자 정보", text: "<span class='hint-title'>[김 형사의 대답]</span>\n> \"아, 다른 용의자들은 알리바이가 다 있더라고.\"\n> \"우린 그 'Andrew'를 쫓고 있지. 알고 보니 그놈, 예전에 불법 밀매를 한 적이 있더군.\"" },
         "G_Map_Police": { name: "경찰 수색 보고서", text: "<span class='hint-title'>[경찰 수색 보고서]</span>\n> \"실종자(Eloise)의 자취방을 기준으로 반경 100m를 수색했음.\"\n> \"수상한 정황은 발견되지 않음.\""},
         "C2_Police": { name: "15일자 CCTV 기록", text: "[15일자 CCTV 기록]\n> \"15일 14:00, Eloise가 마을 도서관을 방문한 것을 마지막으로 행적 종료.\""},
         "C2_Police_Weak": { name: "김 형사의 브리핑 (15일)", text: "[김 형사의 브리핑]\n> ... (중략) ... \"확실한 건, 그녀의 마지막 행적은 15일 오후 2시, 마을 도서관이었다는 거야.\"" },
@@ -111,11 +111,11 @@ const gameData = {
         "G_Num_Desk": { name: "오두막의 계산 메모", text: "<span class='hint-title'>[책상 위 찢어진 메모]</span>\n> \"780 / 6 = 130...\"" },
         "C2_Desk": { name: "오두막의 달력", text: "<span class='hint-title'>[책상 위 달력]</span>\n> \"10월 15일\" 날짜에 붉은색으로 'D-DAY'라고 적혀있다." },
         "G_Map_History": { name: "PC방 검색 기록", text: "<span class='hint-title'>[브라우저 검색 기록]</span>\n> \"'Eloise'의 아이디로 검색한 마지막 기록: '자취방에서 의대 실험실까지 거리' (15일 14:30)\""},
-        "F_Debt": { name: "빚 독촉장", text: "<span class'hint-title'>[빚 독촉장 및 주식 책]</span>\n> '단기간 고수익' 챕터가 심하게 접혀있다." },
+        "F_Debt": { name: "빚 독촉장", text: "<span class='hint-title'>[빚 독촉장 및 주식 책]</span>\n> '단기간 고수익' 챕터가 심하게 접혀있다." },
         "F_ID_Card": { name: "파기된 병원 출입증", text: "<span class='hint-title'>[파기된 병원 출입증]</span>\n> (가위로 잘려 이름 부분이 보이지 않는다)\n> - 소속: 대학 병원 (신관)" },
-        "F_News_Scrap": { name: "신문 스크랩", text: "<span class'hint-title'>[신문 스크랩]</span>\n> \"전국적 혈액 부족 사태... 불법 밀매 기승\"" },
-        "F_Post": { name: "Eloise의 문의글", text: "<span class'hint-title'>[Eloise의 문의글]</span>\n> \"월 500 '타이핑 알바' 보고 연락드립니다.\" / (답변): \"네,'Andrew'에게 연락하세요.\"" },
-        "F_Operator": { name: "카페 운영자의 쪽지", text: "<span class'hint-title'>[운영자의 답변]</span>\n> \"아, 그분. ...지금은 '지방 출장' 중이세요.\"" },
+        "F_News_Scrap": { name: "신문 스크랩", text: "<span class='hint-title'>[신문 스크랩]</span>\n> \"전국적 혈액 부족 사태... 불법 밀매 기승\"" },
+        "F_Post": { name: "Eloise의 문의글", text: "<span class='hint-title'>[Eloise의 문의글]</span>\n> \"월 500 '타이핑 알바' 보고 연락드립니다.\" / (답변): \"네,'Andrew'에게 연락하세요.\"" },
+        "F_Operator": { name: "카페 운영자의 쪽지", text: "<span class='hint-title'>[운영자의 답변]</span>\n> \"아, 그분. ...지금은 '지방 출장' 중이세요.\"" },
         "F_Scam_Method": { name: "사기 피해 게시글", text: "<span class'hint-title'>[피해자 A의 글]</span>\n> \"...저도 '월 500' 보고 갔다가 당할 뻔했어요. 그 사람들, 'Andrew'라는 컨설턴트가 주선자인데, 사람들을 '지방 연수원'으로 보낸다고 하더군요...\"" }
     },
     suspects: {
@@ -155,7 +155,7 @@ const gameData = {
 // --- [2. 플레이어 상태] ---
 let playerState;
 
-// --- [3. DOM 요소 캐싱 (V21)] ---
+// --- [3. DOM 요소 캐싱 (V28 - 인벤토리 복구)] ---
 const $ = (selector) => document.querySelector(selector);
 
 const elements = {
@@ -202,6 +202,7 @@ const elements = {
     endingText: $('#ending-text'),
     restartBtn: $('#restart-btn'),
 
+    // [V28 수정] 인벤토리 DOM 요소 복구
     inventory: $('#inventory'),
     inventoryToggle: $('#inventory-toggle'),
     inventoryList: $('#inventory-list')
@@ -260,7 +261,7 @@ function startTypewriter(element, text, speed = 25, callback) {
 function skipTyping(element, callback) {
     if (currentFullText) { 
         clearTimeout(typingTimeout);
-        element.innerHTML = currentFullText.replace(/\n/g, '<br>'); // [V24] 줄바꿈 처리 추가
+        element.innerHTML = currentFullText.replace(/\n/g, '<br>'); 
         currentFullText = ""; 
         if (callback) callback();
     }
@@ -268,7 +269,7 @@ function skipTyping(element, callback) {
 
 // --- [4. 게임 엔진 (V21)] ---
 
-/** 게임 초기화 함수 */
+/** 게임 초기화 함수 (V28 수정) */
 function initGame() {
     playerState = {
         visitCount: 0,
@@ -284,6 +285,7 @@ function initGame() {
     elements.backgroundImage.src = gameData.screens.intro;
     elements.backgroundImage.classList.add('visible');
     
+    // [V28 수정] 인벤토리 초기화 복구
     elements.inventoryList.innerHTML = "아직 단서가 없습니다.";
     elements.inventory.classList.remove('open');
 
@@ -448,7 +450,7 @@ function renderDebrief() {
     });
 }
 
-/** [화면 3] 힌트 결과 화면 렌더링 (V30 수정) */
+/** [화면 3] 힌트 결과 화면 렌더링 (V28 수정) */
 function renderResultView(locId, actionId) {
     showView('result-view');
     
@@ -459,12 +461,12 @@ function renderResultView(locId, actionId) {
     action.hint_ids.forEach(hintId => {
         const hint = gameData.hints[hintId];
         if (hint) {
-            // [V30 수정] 힌트 텍스트를 바로 사용 (replace 삭제)
             resultHTML += `${hint.text}\n\n\n`; 
+            playerState.inventory.add(hintId); // [V28] 힌트 저장은 계속
         }
     });
 
-    updateInventory();
+    updateInventory(); // [V28] 인벤토리 UI 업데이트 호출
     
     elements.backToActionsBtn.classList.add('hidden');
     
@@ -474,8 +476,10 @@ function renderResultView(locId, actionId) {
     });
 }
 
-/** 인벤토리 UI 업데이트 */
+/** 인벤토리 UI 업데이트 (V28 복구) */
 function updateInventory() {
+    if (!elements.inventoryList) return; // 인벤토리가 없으면 종료
+
     if (playerState.inventory.size === 0) {
         elements.inventoryList.innerHTML = "아직 단서가 없습니다.";
         return;
@@ -580,7 +584,7 @@ function checkAndRenderEnding() {
     });
 }
 
-// --- [5. 이벤트 리스너 (V21)] ---
+// --- [5. 이벤트 리스너 (V28 - 인벤토리 복구)] ---
 
 // (인트로) 게임 시작 버튼
 elements.startGameBtn.onclick = () => {
@@ -684,12 +688,12 @@ elements.endingView.onclick = (e) => {
     }
 };
 
-// 인벤토리 토글 버튼
+// [V28 수정] 인벤토리 토글 버튼 복구
 elements.inventoryToggle.onclick = () => {
     elements.inventory.classList.toggle('open');
 };
 
-// --- [6. 게임 시작 (V21)] ---
+// --- [6. 게임 시작 (V28)] ---
 /** 게임 초기화 함수 */
 function initGame() {
     playerState = {
@@ -706,6 +710,7 @@ function initGame() {
     elements.backgroundImage.src = gameData.screens.intro;
     elements.backgroundImage.classList.add('visible');
     
+    // [V28 수정] 인벤토리 초기화 복구
     elements.inventoryList.innerHTML = "아직 단서가 없습니다.";
     elements.inventory.classList.remove('open');
 

@@ -10,13 +10,13 @@
     
     <link rel="stylesheet" href="style.css">
     
-    <title>Eloise 실종 사건</title>
+    <title>엘로이즈 실종 사건</title>
 </head>
 <body>
 
     <div id="game-container">
         <div id="intro-screen" class="game-screen">
-            <h1 id="intro-title">Eloise 실종 사건</h1>
+            <h1 id="intro-title">엘로이즈 실종 사건</h1>
             <p id="intro-story"></p>
             <div id="intro-suspects"></div>
             <button id="start-game-btn" class="hidden">게임 시작</button>
@@ -25,17 +25,18 @@
         <img id="background-image" src="" alt="장소 배경">
 
         <div id="inventory">
-            <div id="inventory-toggle">인벤토리</div>
             <h3>획득한 단서</h3>
             <div id="inventory-list"></div>
         </div>
+        <div id="inventory-toggle">인벤토리</div>
+
 
         <div id="location-select-view" class="game-screen hidden"> 
             <div id="header">
                 <span id="game-title">엘로이즈 실종 사건</span>
                 <div id="header-controls">
                     <span id="visit-counter">남은 방문 기회: 3</span>
-                    <button id="early-guess-btn" class="hidden">최종 지목 시작</button>
+                    <button id="early-guess-btn" class="hidden">🚨 최종 지목 시작</button>
                 </div>
             </div>
             <h2>어디를 방문하시겠습니까? (남은 기회: 3)</h2>
@@ -95,6 +96,7 @@
             <div id="guess-step-2" class="guess-step hidden">
                 <h2>2. 범인이 숨긴 '층수'는?</h2>
                 <div class="guess-group">
+                    <label for="guess-floor">단서가 가리키는 '숫자'를 입력하십시오.</label>
                     <input type="text" id="guess-floor" class="guess-input" placeholder="숫자 입력...">
                 </div>
                 <button id="goto-step-3-btn" class="guess-next-btn">다음</button>
