@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Eloise 실종 사건</title>
+</head>
+<body>
+
+    <div id="game-container">
+        <div id="intro-screen" class="game-screen">
+            <h1 id="intro-title">Eloise 실종 사건</h1>
+            <p id="intro-story"></p>
+            <div id="intro-suspects"></div>
+            <button id="start-game-btn" class="hidden">게임 시작</button>
+        </div>
+        
+        <img id="background-image" src="" alt="장소 배경">
+
+        <div id="inventory">
+            <div id="inventory-toggle">인벤토리</div>
+            <h3>획득한 단서</h3>
+            <div id="inventory-list"></div>
+        </div>
+
+        <div id="location-select-view" class="game-screen hidden"> 
+            <div id="header">
+                <span id="game-title">엘로이즈 실종 사건</span>
+                <div id="header-controls">
+                    <span id="visit-counter">남은 방문 기회: 3</span>
+                    <button id="early-guess-btn" class="hidden">최종 지목 시작</button>
+                </div>
+            </div>
+            <h2>어디를 방문하시겠습니까? (남은 기회: 3)</h2>
+            <div id="location-buttons"></div>
+        </div>
+
+        <div id="action-select-view" class="game-screen hidden">
+            <div id="header">
+                <span id="game-title">탐색 중...</span>
+                <div id="header-controls">
+                    <span id="visit-counter">남은 방문 기회: ?</span>
+                </div>
+            </div>
+            <div id="action-intro"></div>
+            <h2 class="hidden">이 장소에서 2가지 행동을 선택하십시오. (남은 선택: 2)</h2>
+            <div id="action-buttons" class="hidden"></div>
+        </div>
+        
+        <div id="result-view" class="game-screen hidden">
+             <div id="header">
+                <span id="game-title">탐색 결과</span>
+                <div id="header-controls">
+                    <span id="visit-counter">남은 방문 기회: ?</span>
+                </div>
+            </div>
+            <div id="result-text"></div>
+            <button id="back-to-actions-btn" class="hidden">행동 선택으로 돌아가기</button>
+        </div>
+
+        <div id="debrief-screen" class="game-screen hidden">
+            <div id="header">
+                <span id="game-title">탐색 종료</span>
+                <div id="header-controls">
+                    <span id="visit-counter">남은 방문 기회: 0</span>
+                </div>
+            </div>
+            <div id="debrief-text-wrapper">
+                <p id="debrief-text"></p> <button id="goto-final-guess-btn" class="hidden">최종 지목 시작</button>
+            </div>
+        </div>
+
+        <div id="final-guess-view" class="game-screen hidden">
+             <div id="header">
+                <span id="game-title">최종 지목</span>
+                <div id="header-controls"></div>
+            </div>
+            
+            <div id="guess-step-1" class="guess-step">
+                <h2>1. Eloise가 감금된 '최종 은신처'는?</h2>
+                <div class="guess-group">
+                    <label>단서들을 조합하여 장소를 선택하십시오.</label>
+                    <div id="guess-location-buttons" class="guess-button-group"></div>
+                </div>
+                <button id="goto-step-2-btn" class="guess-next-btn">다음</button>
+            </div>
+
+            <div id="guess-step-2" class="guess-step hidden">
+                <h2>2. 범인이 숨긴 '층수'는?</h2>
+                <div class="guess-group">
+                    <input type="text" id="guess-floor" class="guess-input" placeholder="숫자 입력...">
+                </div>
+                <button id="goto-step-3-btn" class="guess-next-btn">다음</button>
+            </div>
+            
+            <div id="guess-step-3" class="guess-step hidden">
+                <h2>3. 이 모든 비극을 설계한 '범인'은?</h2>
+                <div class="guess-group">
+                    <label>증거가 가리키는 단 한 사람을 지목하십시오.</label>
+                    <div id="guess-culprit-buttons" class="guess-button-group"></div>
+                </div>
+                <button id="submit-final-guess-btn">모든 지목 완료. 구출을 시도한다.</button>
+            </div>
+
+        </div>
+        
+        <div id="ending-view" class="game-screen hidden">
+            <h1 id="ending-title"></h1>
+            <p id="ending-text"></p>
+            <button id="restart-btn" class="hidden">다시 플레이하기</button>
+        </div>
+
+    </div> <script src="script.js" defer></script>
+</body>
+</html>

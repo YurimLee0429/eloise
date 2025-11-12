@@ -1,0 +1,632 @@
+/* --- 'Spectral' 폰트 및 기본 스타일 --- */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden; 
+    font-family: 'Spectral', serif; 
+    background-color: #000;
+    color: #eee;
+}
+#game-container {
+    width: 100vw; 
+    height: 100vh;
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box; 
+}
+
+/* --- 백그라운드 이미지 --- */
+#background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+}
+#background-image.visible {
+    opacity: 0.4; /* 배경 투명도 */
+}
+
+/* --- 게임 화면 --- */
+.game-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 30px 40px; 
+
+    z-index: 2;
+    overflow-y: auto;
+}
+.hidden {
+    display: none !important;
+}
+
+/* --- 타자기 효과 --- */
+.typing-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.1em;
+    background-color: #eee;
+    margin-left: 3px;
+    animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+    from, to { background-color: transparent; }
+    50% { background-color: #eee; }
+}
+#intro-story { min-height: 150px; }
+#action-intro { min-height: 120px; }
+#result-text { min-height: 300px; }
+#ending-text { min-height: 300px; }
+#debrief-text { min-height: 150px; } 
+
+
+/* --- 0. 인트로 화면 --- */
+#intro-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#intro-title {
+    font-size: 52px;
+    color: #eee; 
+    font-weight: 700; 
+    text-shadow: 0 0 15px rgba(238, 238, 238, 0.3); 
+    margin-bottom: 20px;
+}
+#intro-story {
+    font-size: 18px;
+    color: #aaa;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-bottom: 20px;
+    text-align: center; 
+    font-family: 'Spectral', serif; 
+}
+#intro-suspects {
+    display: none; 
+    width: 100%;
+    max-width: 700px;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    padding-top: 20px;
+    text-align: left;
+}
+#intro-suspects h3 {
+    color: #ffc107;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+#intro-suspects p {
+    font-size: 16px;
+    color: #bbb;
+    margin: 5px 0 10px 0;
+    font-family: 'Malgun Gothic', sans-serif;
+    padding-left: 10px;
+    border-left: 2px solid #555;
+}
+#intro-suspects strong {
+    color: #eee;
+    font-family: 'Spectral', serif; 
+}
+#start-game-btn {
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #eee;
+    padding: 15px 40px 14px 40px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Spectral', serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+}
+#start-game-btn:hover {
+    background-color: #111;
+    border-color: #eee;
+    color: #fff;
+}
+
+/* --- 헤더 --- */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; 
+    border-bottom: 2px solid #555;
+    padding-bottom: 10px;
+    flex-shrink: 0;
+}
+#game-title {
+    font-size: 28px;
+    color: #eee;
+    font-weight: 700;
+}
+#header-controls { 
+    display: flex;
+    align-items: baseline;
+    gap: 20px; 
+}
+#visit-counter {
+    font-size: 20px;
+    color: #ffc107;
+    font-family: 'Malgun Gothic', sans-serif; 
+}
+#early-guess-btn {
+    background: transparent;
+    border: none;
+    color: #f87171; 
+    font-family: 'Spectral', serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: all 0.2s ease;
+}
+#early-guess-btn:hover {
+    color: #ffc107; 
+}
+
+
+/* --- 1. 장소 선택 목록 --- */
+#location-select-view {
+    width: 100%;
+}
+#location-select-view h2 {
+    text-align: center;
+    color: #aaa;
+    font-weight: 400;
+    font-size: 22px;
+}
+#location-buttons {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px;
+    margin-top: 30px;
+    width: 100%;
+}
+.location-btn {
+    background-color: transparent; 
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #ccc;
+    padding: 25px 25px 24px 25px; 
+    font-size: 20px; 
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%; 
+    max-width: 600px; 
+    box-sizing: border-box; 
+}
+.location-btn:hover {
+    background-color: #111; 
+    border-color: #eee;
+    color: #fff;
+}
+.location-btn:disabled {
+    background-color: #1a1a1a;
+    color: #555;
+    border-color: #333;
+    cursor: not-allowed;
+    opacity: 0.7;
+    border-bottom-width: 1px; 
+}
+
+/* --- 2. 행동 선택 화면 --- */
+#action-select-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#action-intro {
+    font-size: 18px;
+    color: #bbb;
+    line-height: 1.6;
+    font-style: italic;
+    overflow-y: auto;
+    border-bottom: 1px dashed #444;
+    padding-bottom: 10px;
+    text-align: center; 
+    flex-shrink: 0;
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Spectral', serif; 
+}
+#action-select-view h2 {
+    text-align: center;
+    color: #ffc107; 
+    font-weight: 400;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+#action-buttons {
+    margin-top: 20px;
+    flex-shrink: 0; 
+    max-width: 600px; 
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.action-btn {
+    display: block;
+    width: 100%;
+    background-color: transparent; 
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #ddd;
+    padding: 20px 20px 19px 20px; 
+    font-size: 18px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    text-align: left; 
+}
+.action-btn:hover {
+    background-color: #111; 
+    border-color: #eee;
+    color: #fff;
+}
+.action-btn:disabled {
+    background-color: #1a1a1a;
+    color: #555;
+    cursor: not-allowed;
+    opacity: 0.7;
+    text-decoration: line-through; 
+    border-bottom-width: 1px; 
+}
+
+/* --- 3. 힌트 결과 화면 --- */
+#result-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#result-text {
+    flex-grow: 1;
+    font-size: 18px; 
+    line-height: 1.8;
+    overflow-y: auto;
+    white-space: pre-wrap; 
+    color: #ccc;
+    max-width: 700px; 
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+#result-text .hint-title { 
+    font-size: 20px; 
+    color: #eee; /* [V25 수정] 노란색 -> 밝은 흰색 */
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block; 
+}
+#back-to-actions-btn { 
+    margin-top: 20px;
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #fff;
+    padding: 15px 15px 14px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    max-width: 700px; 
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+#back-to-actions-btn:hover {
+    background-color: #111; 
+    border-color: #eee;
+}
+        
+/* --- 4. 최종 지목 전 '전환' 화면 --- */
+#debrief-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#debrief-screen #visit-counter {
+    display: none;
+}
+#debrief-text-wrapper {
+    max-width: 700px;
+}
+#debrief-text {
+    font-size: 20px;
+    color: #aaa;
+    line-height: 1.8;
+    font-family: 'Spectral', serif;
+}
+#goto-final-guess-btn {
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #b91c1c; 
+    border-radius: 0;
+    color: #f87171;
+    padding: 15px 40px 14px 40px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Spectral', serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+}
+#goto-final-guess-btn:hover {
+    background-color: #111;
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+/* --- 5. 최종 지목 화면 --- */
+#final-guess-view {
+    justify-content: center; 
+}
+#final-guess-view h2 {
+    text-align: center;
+    color: #eee;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+.guess-group {
+    margin: 25px 0;
+    max-width: 600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.guess-group label {
+    display: block;
+    font-size: 18px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+.guess-button-group {
+    margin-top: 20px;
+}
+.guess-choice-btn {
+    display: block;
+    width: 100%;
+    background-color: transparent; 
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #ddd;
+    padding: 15px 15px 14px 15px;
+    font-size: 17px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-family: 'Spectral', serif;
+    text-align: left;
+}
+.guess-choice-btn:hover {
+    background-color: #111; 
+    border-color: #eee;
+    color: #fff;
+}
+.guess-choice-btn.selected {
+    background-color: #0c4a6e;
+    border-color: #38bdf8;
+    color: #fff;
+}
+.guess-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #111;
+    border: 1px solid #555;
+    color: #fff;
+    box-sizing: border-box;
+    font-family: 'Malgun Gothic', sans-serif; 
+    border-radius: 5px; 
+}
+.guess-next-btn {
+    margin-top: 20px;
+    background-color: transparent; 
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #fff;
+    padding: 15px 15px 14px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.guess-next-btn:hover {
+    background-color: #111;
+    border-color: #eee;
+}
+#submit-final-guess-btn {
+    margin-top: 20px;
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #b91c1c; 
+    border-radius: 0;
+    color: #f87171; 
+    padding: 15px 15px 14px 15px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block; 
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#submit-final-guess-btn:hover {
+    background-color: #111;
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+/* --- 6. 엔딩 화면 --- */
+#ending-view {
+    padding-top: 50px; 
+    align-items: center;
+    text-align: center;
+}
+#ending-title {
+    font-size: 52px;
+    font-weight: 700;
+}
+#ending-title.true {
+    color: #60a5fa; 
+    text-shadow: 0 0 15px #60a5fa;
+}
+#ending-title.false {
+    color: #888; 
+    text-shadow: 0 0 15px #888;
+}
+#ending-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #ccc;
+    white-space: pre-wrap;
+    margin-top: 30px;
+    max-width: 700px;
+    text-align: left; 
+    font-family: 'Malgun Gothic', sans-serif;
+}
+#restart-btn {
+    margin-top: 40px; 
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #777;
+    border-radius: 0;
+    color: #fff;
+    padding: 10px 30px 9px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#restart-btn:hover {
+    background-color: #111;
+    border-color: #eee;
+}
+        
+/* --- 인벤토리 (V22 버그 수정) --- */
+#inventory {
+    position: fixed; 
+    top: 0;
+    right: 0;
+    width: 300px; 
+    height: 100vh;
+    background-color: rgba(0,0,0,0.9);
+    border-left: 1px solid #555;
+    z-index: 10;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+#inventory.open {
+    transform: translateX(0);
+}
+#inventory-toggle {
+    position: fixed; 
+    top: 150px;
+    right: 0px; 
+    background-color: #222;
+    border: 1px solid #555;
+    border-right: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    z-index: 11; 
+    border-radius: 5px 0 0 5px;
+    font-family: 'Malgun Gothic', sans-serif;
+}
+#inventory.open ~ #inventory-toggle {
+    transform: translateX(-300px);
+    transition: transform 0.3s ease-in-out;
+}
+#inventory h3 {
+    color: #ffc107;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+    margin-top: 0;
+    font-weight: 700;
+}
+#inventory-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+#inventory-list div {
+    font-size: 14px;
+    color: #bbb;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-family: 'Malgun Gothic', sans-serif;
+}
+
+/* --- 다크모드 스크롤바 --- */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #555 #222;
+}
+/* Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #222;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+    border: 3px solid #222;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+}
